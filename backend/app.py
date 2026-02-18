@@ -6,9 +6,14 @@ from datetime import datetime, timedelta
 import random
 import os
 
-app = Flask(__name__)
-CORS(app)
+@app.route("/")
+def home():
+    return jsonify({
+        "status": "success",
+        "message": "🚛 Freight Platform API Running Successfully!"
+    })
 
+# Use absolute path-safe DB location for Render
 DB_PATH = "freight.db"
 
 def get_db():
@@ -387,8 +392,8 @@ def get_analytics():
         "driver_utilization": utilization
     })
 
+init_db()  # Initialize DB when app starts
+
 if __name__ == "__main__":
     print("🚛 FreightOS Backend starting...")
-    init_db()
-    print("✅ Database initialized")
     app.run(debug=True, port=5000)
