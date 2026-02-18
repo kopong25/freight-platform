@@ -6,6 +6,11 @@ from datetime import datetime, timedelta
 import random
 import os
 
+# 🔥 CREATE THE APP FIRST
+app = Flask(__name__)
+CORS(app)
+
+# Root route
 @app.route("/")
 def home():
     return jsonify({
@@ -24,7 +29,7 @@ def get_db():
 def init_db():
     conn = get_db()
     c = conn.cursor()
-
+    
     c.executescript("""
         CREATE TABLE IF NOT EXISTS drivers (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
